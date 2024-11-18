@@ -1,6 +1,8 @@
 from config import db
 from sqlalchemy import text
 
+from entities.citation import Citation
+
 def create_citation(citation: dict):
     sql = text("""
         INSERT INTO citations (type, author, title, year, booktitle, journal, volume, pages, publisher)
@@ -19,3 +21,21 @@ def create_citation(citation: dict):
     })
     db.session.commit()
 
+def get_citations():
+    result = db.session.execute(text("SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher FROM citations"))
+    citations = result.fetchall()
+    return [
+        Citation(
+            citation[0],   # id
+            citation[1],   # type
+            citation[2],   # author
+            citation[3],   # title
+            citation[4],   # year
+            citation[5],   # booktitle
+            citation[6],   # journal
+            citation[7],   # volume
+            citation[8],   # pages
+            citation[9]    # publisher
+        )
+        for citation in citations
+    ]
