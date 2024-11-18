@@ -6,5 +6,21 @@ LatexLab
 
 {% block body %}
 <h1>LatexLab</h1>
+
+<ul>
+    {% for citation in citations %}
+    <li>
+        <strong>Type:</strong> {{ citation.type }}<br>
+        <strong>Author:</strong> {{ citation.author }}<br>
+        <strong>Title:</strong> {{ citation.title }}<br>
+        <strong>Year:</strong> {{ citation.year }}<br>
+        <strong>Book Title:</strong> {{ citation.booktitle }}<br>
+        <br>
+    </li>
+    {% else %}
+    <li>You don't have any citations</li>
+    {% endfor %}
+</ul>
+
 <a href="/new_citation">New citation</a>
 {% endblock %}
