@@ -35,8 +35,14 @@ def setup_db():
   sql = text(
     f"CREATE TABLE {table_name} ("
     "  id SERIAL PRIMARY KEY, "
-    "  content TEXT NOT NULL,"
-    "  done BOOLEAN DEFAULT FALSE"
+    "  type TEXT NOT NULL,"
+    "  author TEXT NOT NULL,"
+    "  title TEXT NOT NULL,"
+    "  booktitle TEXT,"
+    "  journal TEXT,"
+    "  volume TEXT,"
+    "  pages TEXT,"
+    "  publisher TEXT"
     ")"
   )
 
