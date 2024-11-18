@@ -38,6 +38,7 @@ def setup_db():
     "  type TEXT NOT NULL,"
     "  author TEXT NOT NULL,"
     "  title TEXT NOT NULL,"
+    "  year INT NOT NULL,"
     "  booktitle TEXT,"
     "  journal TEXT,"
     "  volume TEXT,"
