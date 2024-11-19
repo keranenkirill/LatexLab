@@ -39,7 +39,7 @@ Siirry Poetry-virtuaaliympäristöön
 ```bash
 poetry shell
 ```
-Ennen ensimmäistä käynnistystä lue tietokantataulu 
+Ennen ensimmäistä käynnistystä luo tietokantataulu 
 ```bash
 python src/db_helper.py
 ```
