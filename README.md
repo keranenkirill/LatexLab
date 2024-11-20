@@ -31,6 +31,11 @@ Kloonaa repositorio
 ```bash
 git clone git@github.com:keranenkirill/LatexLab.git
 ```
+Luo juurihakemistoon tiedosto .env, jonka sisältö on seuraava:
+ - DATABASE_URL=postgresql://xxx
+ - TEST_ENV=true
+ - SECRET_KEY=satunnainen_merkkijono
+
 Riippuvuuksien asentaminen
 ```bash
 poetry install
