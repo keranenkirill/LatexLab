@@ -54,7 +54,7 @@ class Citation:
             entry["pages"] = self.pages
         if self.publisher:
             entry["publisher"] = self.publisher
-        
+
         db.entries = [entry]
         writer = BibTexWriter()
         return writer.write(db)
