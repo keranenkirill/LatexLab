@@ -3,6 +3,7 @@ from sqlalchemy import text
 
 from entities.citation import Citation
 
+
 def create_citation(citation: dict):
     sql = text("""
         INSERT INTO citations (type, author, title, year, booktitle, journal, volume, pages, publisher)
@@ -21,8 +22,16 @@ def create_citation(citation: dict):
     })
     db.session.commit()
 
+
+def delete_citation(citation_id: int):
+    sql = text("DELETE FROM citations WHERE id = :id")
+    db.session.execute(sql, {"id": citation_id})
+    db.session.commit()
+
+
 def get_citations():
-    result = db.session.execute(text("SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher FROM citations"))
+    result = db.session.execute(text(
+        "SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher FROM citations"))
     citations = result.fetchall()
     return [
         Citation(
