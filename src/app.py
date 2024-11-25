@@ -2,17 +2,27 @@ from flask import flash, jsonify, redirect, render_template, request
 from config import app, test_env
 from db_helper import reset_db
 from entities.citation import Citation
-from repositories.citation_repository import create_citation, get_citations
+from repositories.citation_repository import create_citation, get_citations, del_citation
 from util import validate_citation_form
+
 
 @app.route("/")
 def index():
     citations = get_citations()
-    return render_template("index.html", citations=citations) 
+    return render_template("index.html", citations=citations)
+
 
 @app.route("/new_citation")
 def new_citation():
     return render_template("new_citation.html")
+
+
+@app.route("/delete_citation/<int:citation_id>", methods=["POST"])
+def delete_citation(citation_id):
+    print(f"Deleting citation with id {citation_id}")
+    del_citation(citation_id)
+    return redirect("/")
+
 
 @app.route("/create_citation", methods=["POST"])
 def citation_creation():
@@ -25,9 +35,10 @@ def citation_creation():
         flash(str(error))
         return redirect("/new_citation")
 
+
 # Route for tests
 if test_env:
     @app.route("/reset_db")
     def reset_database():
         reset_db()
-        return jsonify({ 'message': "db reset" })
+        return jsonify({'message': "db reset"})

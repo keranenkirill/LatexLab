@@ -23,7 +23,7 @@ def create_citation(citation: dict):
     db.session.commit()
 
 
-def delete_citation(citation_id: int):
+def del_citation(citation_id: int):
     sql = text("DELETE FROM citations WHERE id = :id")
     db.session.execute(sql, {"id": citation_id})
     db.session.commit()

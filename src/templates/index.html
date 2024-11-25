@@ -15,7 +15,7 @@ LatexLab
         <strong>Title:</strong> {{ citation.title }}<br>
         <strong>Year:</strong> {{ citation.year }}<br>
         <strong>Book Title:</strong> {{ citation.booktitle }}<br>
-        <form action="/delete_citation" method="POST" style="margin-top: 10px;">
+        <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
             <input type="hidden" name="id" value="{{ citation.id }}">
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
