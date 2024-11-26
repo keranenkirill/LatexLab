@@ -15,10 +15,6 @@ LatexLab
         <strong>Title:</strong> {{ citation.title }}<br>
         <strong>Year:</strong> {{ citation.year }}<br>
         <strong>Book Title:</strong> {{ citation.booktitle }}<br>
-        <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
         <br>
     </li>
     {% else %}
@@ -26,5 +22,38 @@ LatexLab
     {% endfor %}
 </ul>
 
+<button onclick="saveAllBibtexToFile()">Save all as BibTex</button>
 <a href="/new_citation">New citation</a>
+
+<script>
+    function toClipboard(buttonElement) {
+        const text = buttonElement.getAttribute('bibtex-clipboard-data');
+        navigator.clipboard.writeText(text);
+    }
+
+    function toFile(buttonElement) {
+        const text = buttonElement.getAttribute('bibtex-file-data');
+        const blob = new Blob([text], { type: 'application/x-bibtex' });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'citations.bib';
+        link.click();
+    }
+
+    function saveAllBibtexToFile() {
+        const citationButtons = document.querySelectorAll('button[bibtex-file-data]');
+        let allBibtexData = '';
+
+        citationButtons.forEach(button => {
+            allBibtexData += button.getAttribute('bibtex-file-data') + '\n';
+        });
+
+        if (allBibtexData) {
+            const tempButton = document.createElement('button');
+            tempButton.setAttribute('bibtex-file-data', allBibtexData);
+            toFile(tempButton);
+        }
+    }
+</script>
 {% endblock %}
