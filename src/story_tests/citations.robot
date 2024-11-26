@@ -36,7 +36,6 @@ Added article should display properly in list
     Page Should Contain                 1999
     Page Should Contain                 booktitle1
 
-*** Test Cases ***
 Deleted article should not be displayed in list
     Go To                               ${HOME_URL}
     Click Link                          New citation
