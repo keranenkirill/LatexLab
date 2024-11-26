@@ -15,6 +15,10 @@ LatexLab
         <strong>Title:</strong> {{ citation.title }}<br>
         <strong>Year:</strong> {{ citation.year }}<br>
         <strong>Book Title:</strong> {{ citation.booktitle }}<br>
+        <button bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
+            clipboard</button>
+        <button bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
+
         <br>
     </li>
     {% else %}
