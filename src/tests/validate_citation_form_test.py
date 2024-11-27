@@ -1,6 +1,4 @@
 import unittest
-
-from entities.citation import Citation
 from util import UserInputError, validate_citation_form
 
 
@@ -37,7 +35,7 @@ class TestCitationValidation(unittest.TestCase):
         with self.assertRaises(UserInputError):
             validate_citation_form(self.valid_article_citation)
 
-    def test_negative_year_gives_error(self):
+    def test_str_as_year_gives_error(self):
         self.valid_article_citation["year"] = "test"
         with self.assertRaises(UserInputError):
             validate_citation_form(self.valid_article_citation)

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import ANY
+from unittest.mock import patch
 from repositories.citation_repository import del_citation
-from unittest.mock import patch, MagicMock
 
 
 class TestDeleteCitation(unittest.TestCase):

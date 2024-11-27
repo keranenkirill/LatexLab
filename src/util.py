@@ -16,8 +16,8 @@ def validate_citation_form(content: dict):
 
     try:
         year = int(year)
-    except ValueError:
-        raise UserInputError("Year must be an integer")
+    except ValueError as exc:
+        raise UserInputError("Year must be an integer") from exc
 
     if year < 1:
         raise UserInputError("Year must be a positive number")

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import ANY
+from unittest.mock import patch
 from repositories.citation_repository import update_citation
-from unittest.mock import patch, MagicMock
 
 
 class TestUpdateCitation(unittest.TestCase):
@@ -10,7 +10,6 @@ class TestUpdateCitation(unittest.TestCase):
     def test_update_citation(self, mock_session):
 
         mock_execute = mock_session.execute
-        mock_commit = mock_session.commit
 
         citation_id = 1
         citation = {

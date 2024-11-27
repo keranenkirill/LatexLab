@@ -1,7 +1,7 @@
-from config import db, app
 from sqlalchemy import text
+from config import db, app
 
-table_name = "citations"
+table_name = "citations" # pylint: disable=invalid-name
 
 
 def table_exists(name):

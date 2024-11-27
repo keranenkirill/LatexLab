@@ -1,5 +1,5 @@
-from config import db
 from sqlalchemy import text
+from config import db
 
 from entities.citation import Citation
 
@@ -31,7 +31,8 @@ def del_citation(citation_id: int):
 
 def get_citations():
     result = db.session.execute(text(
-        "SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher FROM citations"))
+        """SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher 
+        FROM citations"""))
     citations = result.fetchall()
     return [
         Citation(
