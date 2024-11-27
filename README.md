@@ -16,7 +16,7 @@ Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelm
 - **Viitteiden lisääminen:** Mahdollisuus lisätä viitteitä käyttäjäystävällisen lomakkeen kautta.
 - **Viitteiden listaus:** Viitteet voidaan listata selkeästi ja luettavassa muodossa.
 - **Viitte tiedoston generoiminen:** Viitteestä voi generoida LaTeX-dokumenttiin yhteensopiva BibTeX-tyyppinen tiedosto.
-- **Viitteiden suodattaminen:** viitteen tyypin, kirjoittajanm,vuoden tai julkaisun mukaan. 
+- **Viitteiden suodattaminen:** viitteen tyypin, kirjoittajan,vuoden tai julkaisun mukaan. 
 
 ## Teknologiat
 - poetry
