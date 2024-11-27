@@ -4,7 +4,7 @@
 
 ## Järjestelmän kuvaus
 
-Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelmään helppokäyttöisen käyttöliittymän kautta. Järjestelmä generoi näistä viitteistä automaattisesti BibTeX-tiedoston, jonka voi helposti liittää LaTeX-dokumenttiin. Sovellus mahdollistaa viitteiden tehokkaan hallinnan, suodatuksen ja organisoinnin, koska LaTeXissa viitteiden hallinta voi olla monimutkaista ja aikaa vievää. Keskittymällä gradun kannalta olennaisiin viitekenttiin sovellus tekee viitteiden hallinnasta käyttäjäystävällisempää ja vähentää manuaalista työtä.
+Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelmään helppokäyttöisen käyttöliittymän kautta. Järjestelmä generoi näistä viitteistä automaattisesti BibTeX-tiedoston, jonka voi helposti liittää LaTeX-dokumenttiin. Sovellus mahdollistaa viitteiden tehokkaan hallinnan, suodatuksen ja organisoinnin, koska LaTeXissa viitteiden hallinta voi olla monimutkaista ja aikaa vievää. Keskittymällä gradun kannalta olennaisiin viitekenttiin sovellus tekee viitteiden hallinnasta käyttäjäystävällisempää ja vähentää manuaalista työtä. Sovellus tukee article-, inproceedings- ja book-lähdetyyppejä.
 
 
 ## Dokumentit
