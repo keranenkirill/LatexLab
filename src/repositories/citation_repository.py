@@ -49,8 +49,8 @@ def get_citations():
         for citation in citations
     ]
 
-def update_citation(citation_id: int, citation: dict):
 
+def update_citation(citation_id: int, citation: dict):
 
     sql = text("""
     UPDATE  citations
@@ -61,7 +61,6 @@ def update_citation(citation_id: int, citation: dict):
             booktitle = :booktitle
     WHERE   id = :id
     """)
-
 
     db.session.execute(sql, {
         "type": citation["type"],

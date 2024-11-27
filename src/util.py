@@ -1,6 +1,7 @@
 class UserInputError(Exception):
     pass
 
+
 def validate_citation_form(content: dict):
     type = content.get('type')
     author = content.get('author')
@@ -12,11 +13,11 @@ def validate_citation_form(content: dict):
 
     if not author or not title or not year:
         raise UserInputError("Please fill all necessary fields")
-    
+
     try:
         year = int(year)
     except ValueError:
         raise UserInputError("Year must be an integer")
-    
+
     if year < 1:
         raise UserInputError("Year must be a positive number")

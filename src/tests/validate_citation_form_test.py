@@ -3,6 +3,7 @@ import unittest
 from entities.citation import Citation
 from util import UserInputError, validate_citation_form
 
+
 class TestCitationValidation(unittest.TestCase):
     def setUp(self):
         self.valid_article_citation = {

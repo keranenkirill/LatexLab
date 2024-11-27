@@ -54,7 +54,6 @@ def citation_update(citation_id):
         return redirect("/edit_citation/<int:citation_id>")
 
 
-
 # Route for tests
 if test_env:
     @app.route("/reset_db")

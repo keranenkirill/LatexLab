@@ -1,8 +1,11 @@
 from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
 
+
 class Citation:
-    def __init__(self, id, type, author, title, year, booktitle=None, journal=None, volume=None, pages=None, publisher=None):
+    def __init__(self, id, type, author, title, year, booktitle=None,
+                journal=None, volume=None, pages=None, publisher=None
+        ):
         self.id = id
         self.type = type
         self.author = author
@@ -34,7 +37,7 @@ class Citation:
         if self.publisher:
             details.append(f"Publisher: {self.publisher}")
         return "\n".join(details)
-    
+
     def to_bibtex(self):
         db = BibDatabase()
         entry = {
