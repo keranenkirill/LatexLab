@@ -47,13 +47,11 @@ def citation_update(citation_id):
 
     try:
         validate_citation_form(form_content)
-        print("so far so good")
         update_citation(citation_id, form_content)
-
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return redirect("/edit_citation")
+        return redirect("/edit_citation/<int:citation_id>")
 
 
 
