@@ -19,9 +19,9 @@ LatexLab
             <input type="hidden" name="id" value="{{ citation.id }}">
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
-        <form action="/edit_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
+        <form action="/edit_citation/{{ citation.id}}" method="GET" style="margin-top: 10px;">
             <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn">Edit</button>
         </form>
         <button bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
             clipboard</button>

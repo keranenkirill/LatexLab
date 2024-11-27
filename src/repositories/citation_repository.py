@@ -49,41 +49,27 @@ def get_citations():
         for citation in citations
     ]
 
-def update_citation(citation_id: int, new_info: dict):
+def update_citation(citation_id: int, citation: dict):
 
 
-
-    fields = """
-    id,
-    type,
-    author,
-    title,
-    year,
-    booktitle,
-    journal,
-    volume,
-    pages,
-    publisher
-    """.splitlines()
-
-    sql = """
-    SELECT  {fields[0]},
-            {fields[1]},
-            {fields[2]},
-            {fields[3]},
-            {fields[4]},
-            {fields[5]},
-            {fields[6]},
-            {fields[7]},
-            {fields[8]}
-    FROM    citations
+    sql = text("""
+    UPDATE  citations
+    SET     type = :type,
+            author = :author,
+            title = :title,
+            year = :year,
+            booktitle = :booktitle
     WHERE   id = :id
-    """
+    """)
 
-    old_info = db.session.execute(text(sql)).fetchall()
 
-    new_fields = []
+    db.session.execute(sql, {
+        "type": citation["type"],
+        "author": citation["author"],
+        "title": citation["title"],
+        "year": citation["year"],
+        "booktitle": citation["booktitle"],
+        "id": citation_id
 
-    for i in range(10):
-        if new_info[i] == "":
-            new_fields[0] = 1
+    })
+    db.session.commit()

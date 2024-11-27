@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Create a new citation
+Edit Citation
 {% endblock %}
 
 {% block body %}
 
-<h2>Create a new citation</h2>
+<h2>Edit citation. Citation id: {{citation_id}}</h2>
 
-<form action="/edit_citation" method="post">
+<form action="/update_citation/{{citation_id}}" method="post">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
