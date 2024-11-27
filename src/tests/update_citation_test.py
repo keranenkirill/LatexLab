@@ -1,6 +1,6 @@
 import unittest
 
-from citation_repository import update_citation
+from repositories.citation_repository import update_citation
 from unittest.mock import patch, MagicMock
 
 class TestUpdateCitation(unittest.TestCase):
