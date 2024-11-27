@@ -41,7 +41,7 @@ jobs:
       - name: Run unit tests
         run: poetry run pytest src/tests
       - name: Run pylint
-        run: pylint src
+        run: poetry run pylint src
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
       - run: |
