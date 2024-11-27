@@ -35,6 +35,10 @@ def citation_creation():
         flash(str(error))
         return redirect("/new_citation")
 
+@app.route("/edit_citation", methods=["POST"])
+def edit_citation(citation_id):
+    return render_template("edit_citation.html", citation_id=citation_id)
+
 
 # Route for tests
 if test_env:
