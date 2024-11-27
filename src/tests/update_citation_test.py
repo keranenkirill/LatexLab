@@ -1,12 +1,12 @@
 import unittest
-
+from unittest.mock import ANY
 from repositories.citation_repository import update_citation
 from unittest.mock import patch, MagicMock
 
 class TestUpdateCitation(unittest.TestCase):
 
 
-    @patch('citation_repository.db.session')
+    @patch('repositories.citation_repository.db.session')
     def test_update_citation(self, mock_session):
 
         mock_execute = mock_session.execute
@@ -23,7 +23,7 @@ class TestUpdateCitation(unittest.TestCase):
         }
 
 
-        update_citation(citation_id, citation_data)
+        update_citation(citation_id, citation)
 
         mock_execute.assert_called_once_with(
             ANY,
