@@ -41,6 +41,21 @@ class TestCitationValidation(unittest.TestCase):
     def test_valid_citation_does_not_raise_error(self):
         validate_citation_form(self.valid_article_citation)
 
+    def test_missing_author_gives_error(self):
+        self.valid_article_citation["author"] = None
+        with self.assertRaises(UserInputError):
+            validate_citation_form(self.valid_article_citation)
+
+    def test_missing_title_gives_error(self):
+        self.valid_article_citation["title"] = None
+        with self.assertRaises(UserInputError):
+            validate_citation_form(self.valid_article_citation)
+
+    def test_missing_year_gives_error(self):
+        self.valid_article_citation["year"] = None
+        with self.assertRaises(UserInputError):
+            validate_citation_form(self.valid_article_citation)
+
     def test_invalid_type_gives_error(self):
         self.valid_article_citation["type"] = "invalid_type"
         with self.assertRaises(UserInputError):
