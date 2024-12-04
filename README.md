@@ -11,6 +11,7 @@ Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelm
 * [Manuaali](docs/manuaali.md)
 * [Valmiin määritelmä](docs/definitionOfDone.md)
 * [Product Backlog](https://docs.google.com/spreadsheets/d/1z1sriGN7_VkhWK3ftrvxO8W_lWaIzaeMN91lBrkc4Ag/edit?gid=1#gid=1)
+* [Kattavuus raportti Backlog](https://html-preview.github.io/?url=https://github.com/keranenkirill/LatexLab/blob/main/htmlcov/index.html)
 
 ## Tulevia toimintoja
 - **Viitteiden lisääminen:** Mahdollisuus lisätä viitteitä käyttäjäystävällisen lomakkeen kautta.
