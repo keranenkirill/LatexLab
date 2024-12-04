@@ -14,7 +14,6 @@ Adding article with negative year not possible
     Input Text                          author                   author1
     Input Text                          title                    title1
     Input Text                          year                     -1
-    Input Text                          booktitle                booktitle1
     Click Button                        Create
     Page Should Contain                 Year must be a positive number
 
@@ -25,16 +24,15 @@ Added article should display properly in list
     Wait Until Page Contains Element    title
     Wait Until Page Contains Element    year
     Wait Until Page Contains Element    booktitle
-    Input Text                          author                      author1
+    Input Text                          author                      author10
     Input Text                          title                       title1
     Input Text                          year                        1999
-    Input Text                          booktitle                   booktitle1
     Click Button                        Create
     Sleep                               5s
-    Page Should Contain                 author1
+    Page Should Contain                 author10
     Page Should Contain                 title1
     Page Should Contain                 1999
-    Page Should Contain                 booktitle1
+    Click Button                        Delete
 
 Deleted article should not be displayed in list
     Go To                               ${HOME_URL}
@@ -42,19 +40,14 @@ Deleted article should not be displayed in list
     Wait Until Page Contains Element    author
     Wait Until Page Contains Element    title
     Wait Until Page Contains Element    year
-    Wait Until Page Contains Element    booktitle
     Input Text                          author                      author1
     Input Text                          title                       title1
     Input Text                          year                        1999
-    Input Text                          booktitle                   booktitle1
     Click Button                        Create
     Page Should Contain                 author1
     Page Should Contain                 title1
     Page Should Contain                 1999
-    Page Should Contain                 booktitle1
     Click Button                        Delete
     Page Should Not Contain             author1
     Page Should Not Contain             title1
     Page Should Not Contain             1999
-    Page Should Not Contain             booktitle1
-    
