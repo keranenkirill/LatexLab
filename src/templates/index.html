@@ -10,11 +10,25 @@ LatexLab
 <ul>
     {% for citation in citations %}
     <li>
-        <strong>Type:</strong> {{ citation.type }}<br>
-        <strong>Author:</strong> {{ citation.author }}<br>
-        <strong>Title:</strong> {{ citation.title }}<br>
-        <strong>Year:</strong> {{ citation.year }}<br>
-        <strong>Book Title:</strong> {{ citation.booktitle }}<br>
+       
+
+        <div>
+            <strong>Type:</strong> {{ citation.type }} <br>
+            <strong>Author:</strong> {{ citation.author }} <br>
+            <strong>Year:</strong> {{ citation.year }} <br>
+            
+            {% if citation.type == "article" %}
+                <strong>Journal:</strong> {{ citation.journal }} <br>
+                <strong>Volume:</strong> {{ citation.volume }} <br>
+                <strong>Pages:</strong> {{ citation.pages }} <br>
+            {% elif citation.type == "inproceedings" %}
+                <strong>Book title:</strong> {{ citation.booktitle }} <br>
+            {% elif citation.type == "book" %}
+                <strong>Publisher:</strong> {{ citation.publisher }} <br>
+            {% endif %}
+        </div>
+            
+        
         <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
             <input type="hidden" name="id" value="{{ citation.id }}">
             <button type="submit" class="btn btn-danger">Delete</button>
@@ -66,5 +80,8 @@ LatexLab
             toFile(tempButton);
         }
     }
+
+
+
 </script>
 {% endblock %}

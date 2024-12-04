@@ -19,25 +19,87 @@ Create a new citation
     {% endif %}
     {% endwith %}
     <label for="type">Type:</label>
-    <select name="type">
-        <option value="article">Article</option>
+    <select name="type" id="type" onchange="changeFields()">
+        <option value="article" selected>Article</option>
+        <option value="inproceeding">Inproceeding</option>
+        <option value="book">Book</option>
     </select>
-    <br>
-    <label for="author">Author:</label>
-    <input type="text" name="author" required>
-    <br>
-    <label for="title">Title:</label>
-    <input type="text" name="title" required>
-    <br>
-    <label for="year">Year:</label>
-    <input type="number" name="year" required>
-    <br>
-    <label for="booktitle">Booktitle:</label>
-    <input type="text" name="booktitle" required>
-    <br>
+    <div>
+        <label for="author">Author:</label>
+        <input type="text" name="author" required>
+    </div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+    <div>
+        <label for="year">Year:</label>
+        <input type="number" name="year" required>
+    </div> 
+    <div class="inproceedings changing_field">
+        <label for="booktitle" id="booktitle_label" >Booktitle:</label>
+        <input type="text" name="booktitle">
+    </div>
+    <div class="article changing_field">
+        <label for="journal" id="journal_label" >Journal:</label>
+        <input type="text" name="booktitle" >
+    </div>
+    <div class="article changing_field">
+        <label for="volume" id="volume_id" >Volume:</label>
+        <input type="text" name="booktitle" >
+            
+    </div>
+    <div class="article changing_field">
+        <label for="pages" id="pages_id" >Pages:</label>
+        <input type="text" name="booktitle" >        
+    </div>
+    <div class="book changing_field">
+        <label for="publisher" id="publisher_id" >Publisher:</label>
+        <input type="text" name="booktitle">        
+    </div>
+
+    
     <button type="submit">
         Create
     </button>
 </form>
+
+
+<script>
+    function changeFields(){
+        var type = document.querySelector('select[name="type"]').value;
+
+        var changingFields = document.querySelectorAll('.changing_field');
+
+        var inproceedingsFields = document.querySelectorAll("div.inproceedings");
+        var articleFields = document.querySelectorAll("div.article");
+        var bookFields = document.querySelectorAll("div.book");
+
+        changingFields.forEach(item => {
+            item.style.display = "none";
+        });
+
+        if (type === "article"){
+            articleFields.forEach(item => item.style.display = "block");
+
+        } else if (type === "inproceeding"){
+            inproceedingsFields.forEach(item => item.style.display = "block");
+
+        } else if (type === "book"){
+            bookFields.forEach(item => item.style.display = "block");
+        }
+
+        
+    
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+            changeFields();
+        });
+</script>
+
+<style>
+    
+</style>
+
+
 
 {% endblock %}

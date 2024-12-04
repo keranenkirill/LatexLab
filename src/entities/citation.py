@@ -3,8 +3,8 @@ from bibtexparser.bwriter import BibTexWriter
 
 
 class Citation:
-    def __init__(self, id, type, author, title, year, booktitle=None,
-                journal=None, volume=None, pages=None, publisher=None
+    def __init__(self, id, type, author, title, year, booktitle,
+                journal, volume, pages, publisher
         ):
         self.id = id
         self.type = type
@@ -17,6 +17,19 @@ class Citation:
         self.pages = pages
         self.publisher = publisher
         self.as_bibtex = self.to_bibtex()
+
+    def to_dict(self):
+        return {
+        'type':self.type,
+        'author':self.author,
+        'title':self.title,
+        'year':self.year,
+        'booktitle':self.booktitle,
+        'journal':self.journal,
+        'volume':self.volume,
+        'pages':self.pages,
+        'publisher':self.publisher
+        }
 
     def __str__(self):
         details = [
