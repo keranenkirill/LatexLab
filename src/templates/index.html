@@ -15,13 +15,14 @@ LatexLab
         <div>
             <strong>Type:</strong> {{ citation.type }} <br>
             <strong>Author:</strong> {{ citation.author }} <br>
+            <strong>Title:</strong> {{ citation.title }} <br>
             <strong>Year:</strong> {{ citation.year }} <br>
             
             {% if citation.type == "article" %}
                 <strong>Journal:</strong> {{ citation.journal }} <br>
                 <strong>Volume:</strong> {{ citation.volume }} <br>
                 <strong>Pages:</strong> {{ citation.pages }} <br>
-            {% elif citation.type == "inproceedings" %}
+            {% elif citation.type == "inproceeding" %}
                 <strong>Book title:</strong> {{ citation.booktitle }} <br>
             {% elif citation.type == "book" %}
                 <strong>Publisher:</strong> {{ citation.publisher }} <br>

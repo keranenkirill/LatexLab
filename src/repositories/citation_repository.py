@@ -56,10 +56,14 @@ def update_citation(citation_id: int, citation: dict):
     sql = text("""
     UPDATE  citations
     SET     type = :type,
-            author = :author,
-            title = :title,
-            year = :year,
-            booktitle = :booktitle
+        author = :author,
+        title = :title,
+        year = :year,
+        booktitle = :booktitle,
+        journal = :journal,
+        volume = :volume,
+        pages = :pages,
+        publisher = :publisher
     WHERE   id = :id
     """)
 
@@ -68,8 +72,11 @@ def update_citation(citation_id: int, citation: dict):
         "author": citation["author"],
         "title": citation["title"],
         "year": citation["year"],
-        "booktitle": citation["booktitle"],
+        "booktitle": citation.get("booktitle", None),
+        "journal": citation.get("journal", None),
+        "volume": citation.get("volume", None),
+        "pages": citation.get("pages", None),
+        "publisher": citation.get("publisher", None),
         "id": citation_id
-
     })
     db.session.commit()
