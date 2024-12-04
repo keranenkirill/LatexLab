@@ -14,6 +14,9 @@ Adding article with negative year not possible
     Input Text                          author                   author1
     Input Text                          title                    title1
     Input Text                          year                     -1
+    Input Text                          journal                  journal1
+    Input Text                          volume                   volume1
+    Input Text                          pages                    pages1
     Click Button                        Create
     Page Should Contain                 Year must be a positive number
 
@@ -27,6 +30,9 @@ Added article should display properly in list
     Input Text                          author                      author10
     Input Text                          title                       title1
     Input Text                          year                        1999
+    Input Text                          journal                     journal1
+    Input Text                          volume                      volume1
+    Input Text                          pages                       pages1
     Click Button                        Create
     Sleep                               5s
     Page Should Contain                 author10
