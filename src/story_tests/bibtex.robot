@@ -21,6 +21,9 @@ Check bibtext to clipboard output for article
     Input Text                          author                      bibtext_author
     Input Text                          title                       bib_title
     Input Text                          year                        2024
+    Input Text                          journal                     journal1
+    Input Text                          volume                      volume1
+    Input Text                          pages                       pages1
     Click Button                        Create
     Click Button                        Bibtex to clipboard
     ${pasted_text}=    Get Element Attribute    xpath://button[@onclick="toClipboard(this)"]    bibtex-clipboard-data

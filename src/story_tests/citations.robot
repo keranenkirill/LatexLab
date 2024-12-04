@@ -43,6 +43,9 @@ Deleted article should not be displayed in list
     Input Text                          author                      author1
     Input Text                          title                       title1
     Input Text                          year                        1999
+    Input Text                          journal                     journal1
+    Input Text                          volume                      volume1
+    Input Text                          pages                       pages1
     Click Button                        Create
     Page Should Contain                 author1
     Page Should Contain                 title1
