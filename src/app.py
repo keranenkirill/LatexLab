@@ -1,7 +1,7 @@
 from flask import flash, jsonify, redirect, render_template, request
 from config import app, test_env
 from db_helper import reset_db
-from repositories.citation_repository import create_citation, get_citations
+from repositories.citation_repository import create_citation, get_citations, get_citation
 from repositories.citation_repository import del_citation, update_citation
 from util import validate_citation_form
 
@@ -38,7 +38,8 @@ def citation_creation():
 
 @app.route("/edit_citation/<int:citation_id>", methods=["GET"])
 def edit_citation(citation_id):
-    return render_template("edit_citation.html", citation_id=citation_id)
+    citation = get_citation(citation_id)
+    return render_template("edit_citation.html", citation_id=citation_id, citation=citation)
 
 
 @app.route("/update_citation/<int:citation_id>", methods=["POST"])

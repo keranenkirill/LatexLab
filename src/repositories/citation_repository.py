@@ -51,6 +51,24 @@ def get_citations():
     ]
 
 
+def get_citation(citation_id):
+    result = db.session.execute(text(
+        """SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher 
+        FROM citations WHERE id = :id"""), {'id': citation_id})
+    citation = result.fetchone()
+    return Citation(
+        citation.id,       # id
+        citation.type,     # type
+        citation.author,   # author
+        citation.title,    # title
+        citation.year,     # year
+        citation.booktitle,# booktitle
+        citation.journal,  # journal
+        citation.volume,   # volume
+        citation.pages,    # pages
+        citation.publisher # publisher
+    )
+
 def update_citation(citation_id: int, citation: dict):
 
     sql = text("""

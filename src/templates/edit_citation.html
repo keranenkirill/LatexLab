@@ -26,35 +26,35 @@ Edit Citation
     </select>
     <div>
         <label for="author">Author:</label>
-        <input type="text" name="author" required>
+        <input type="text" name="author" value="{{citation.author}}" required>
     </div>
         <label for="title">Title:</label>
-        <input type="text" name="title" required>
+        <input type="text" name="title" value="{{citation.title}}" required>
     <div>
         <label for="year">Year:</label>
-        <input type="number" name="year" required>
+        <input type="number" name="year" value="{{citation.year}}" required>
     </div> 
     <div class="inproceedings changing_field">
         <label for="booktitle" id="booktitle_label" >Booktitle:</label>
-        <input type="text" name="booktitle" >
+        <input type="text" name="booktitle" value="{{citation.booktitle}}">
     </div>
     <div class="article changing_field">            
         
         <label for="journal" id="journal_label" >Journal:</label>
-        <input type="text" name="journal" >
+        <input type="text" name="journal" value="{{citation.journal}}">
     </div>
     <div class="article changing_field">
         <label for="volume" id="volume_id" >Volume:</label>
-        <input type="text" name="volume" >
+        <input type="text" name="volume" value="{{citation.volume}}">
             
     </div>
     <div class="article changing_field">
         <label for="pages" id="pages_id" >Pages:</label>
-        <input type="text" name="pages" >        
+        <input type="text" name="pages" value="{{citation.pages}}">        
     </div>
     <div class="book changing_field">
         <label for="publisher" id="publisher_id" >Publisher:</label>
-        <input type="text" name="publisher">        
+        <input type="text" name="publisher" value="{{citation.publisher}}">        
     </div>
 
     
@@ -64,6 +64,12 @@ Edit Citation
 </form>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var citationType = "{{citation.type}}";
+        var selectElement = document.getElementById('type');
+        selectElement.value = citationType;
+    });
+
     function changeFields(){
         var type = document.querySelector('select[name="type"]').value;
 
