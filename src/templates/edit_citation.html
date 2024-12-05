@@ -6,100 +6,80 @@ Edit Citation
 
 {% block body %}
 
-<h2>Edit citation. Citation id: {{citation_id}}</h2>
+<h2>Edit Citation. Citation ID: {{ citation_id }}</h2>
 
-<form action="/update_citation/{{citation_id}}" method="post">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <label for="type">Type:</label>
-    <select name="type" id="type" onchange="changeFields()">
-        <option value="article" selected>Article</option>
-        <option value="inproceeding">Inproceeding</option>
-        <option value="book">Book</option>
-    </select>
-    <div>
-        <label for="author">Author:</label>
-        <input type="text" name="author" value="{{citation.author}}" required>
-    </div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" value="{{citation.title}}" required>
-    <div>
-        <label for="year">Year:</label>
-        <input type="number" name="year" value="{{citation.year}}" required>
-    </div> 
-    <div class="inproceedings changing_field">
-        <label for="booktitle" id="booktitle_label" >Booktitle:</label>
-        <input type="text" name="booktitle" value="{{citation.booktitle}}">
-    </div>
-    <div class="article changing_field">            
-        
-        <label for="journal" id="journal_label" >Journal:</label>
-        <input type="text" name="journal" value="{{citation.journal}}">
-    </div>
-    <div class="article changing_field">
-        <label for="volume" id="volume_id" >Volume:</label>
-        <input type="text" name="volume" value="{{citation.volume}}">
-            
-    </div>
-    <div class="article changing_field">
-        <label for="pages" id="pages_id" >Pages:</label>
-        <input type="text" name="pages" value="{{citation.pages}}">        
-    </div>
-    <div class="book changing_field">
-        <label for="publisher" id="publisher_id" >Publisher:</label>
-        <input type="text" name="publisher" value="{{citation.publisher}}">        
-    </div>
+<div class="container">
+    <form class="row g-3" action="/update_citation/{{citation_id}}" method="POST">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
 
-    
-    <button type="submit">
-        Edit
-    </button>
-</form>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var citationType = "{{citation.type}}";
-        var selectElement = document.getElementById('type');
-        selectElement.value = citationType;
-    });
+        <div class="form-group col-md-12"> 
+            <div class="col-md-1 p-0">
+                <input type="text" name="type" id="type" class="form-control" value="{{ citation.type }}" readonly>
+            </div>
+        </div>
 
-    function changeFields(){
-        var type = document.querySelector('select[name="type"]').value;
 
-        var changingFields = document.querySelectorAll('.changing_field');
+        <div class="mb-3 col-md-6">
+            <label for="author" class="form-label">Author:</label>
+            <input type="text" name="author" class="form-control w-75" value="{{ citation.author }}" required>
+        </div>
 
-        var inproceedingsFields = document.querySelectorAll("div.inproceedings");
-        var articleFields = document.querySelectorAll("div.article");
-        var bookFields = document.querySelectorAll("div.book");
+        <div class="mb-3 col-md-6">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" name="title" class="form-control w-75" value="{{ citation.title }}" required>
+        </div>
 
-        changingFields.forEach(item => {
-            item.style.display = "none";
-        });
+        <div class="mb-3 col-md-6">
+            <label for="year" class="form-label">Year:</label>
+            <input type="number" name="year" class="form-control w-75" value="{{ citation.year }}" required>
+        </div>
 
-        if (type === "article"){
-            articleFields.forEach(item => item.style.display = "block");
+        {% if citation.type == "inproceeding" %}
+        <div class="mb-3 col-md-6">
+            <label for="booktitle" class="form-label">Booktitle:</label>
+            <input type="text" name="booktitle" class="form-control w-75" value="{{ citation.booktitle }}">
+        </div>
+        {% endif %}
 
-        } else if (type === "inproceeding"){
-            inproceedingsFields.forEach(item => item.style.display = "block");
+        {% if citation.type == "article" %}
+        <div class="mb-3 col-md-6">
+            <label for="journal" class="form-label">Journal:</label>
+            <input type="text" name="journal" class="form-control w-75" value="{{ citation.journal }}">
+        </div>
 
-        } else if (type === "book"){
-            bookFields.forEach(item => item.style.display = "block");
-        }
+        <div class="mb-3 col-md-6">
+            <label for="volume" class="form-label">Volume:</label>
+            <input type="text" name="volume" class="form-control w-75" value="{{ citation.volume }}">
+        </div>
+        {% endif %}
 
-        
-    
-    }
+        {% if citation.type in ["article", "book"] %}
+        <div class="mb-3 col-md-6">
+            <label for="pages" class="form-label">Pages:</label>
+            <input type="text" name="pages" class="form-control w-75" value="{{ citation.pages }}">
+        </div>
+        {% endif %}
 
-    document.addEventListener("DOMContentLoaded", function(){
-            changeFields();
-        });
-</script>
+        {% if citation.type == "book" %}
+        <div class="mb-3 col-md-6">
+            <label for="publisher" class="form-label">Publisher:</label>
+            <input type="text" name="publisher" class="form-control w-75" value="{{ citation.publisher }}">
+        </div>
+        {% endif %}
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

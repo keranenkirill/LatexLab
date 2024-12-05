@@ -8,99 +8,102 @@ Create a new citation
 
 <h2>Create a new citation</h2>
 
-<form action="/create_citation" method="post">
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
+<div class="container">
+    <form class="row" action="/create_citation" method="post">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert alert-info">{{ message }}</div>
         {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <label for="type">Type:</label>
-    <select name="type" id="type" onchange="changeFields()">
-        <option value="article" selected>Article</option>
-        <option value="inproceeding">Inproceeding</option>
-        <option value="book">Book</option>
-    </select>
-    <div>
-        <label for="author">Author:</label>
-        <input type="text" name="author" required>
-    </div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" required>
-    <div>
-        <label for="year">Year:</label>
-        <input type="number" name="year" required>
-    </div> 
-    <div class="inproceedings changing_field">
-        <label for="booktitle" id="booktitle_label" >Booktitle:</label>
-        <input type="text" name="booktitle">
-    </div>
-    <div class="article changing_field">            
-        
-        <label for="journal" id="journal_label" >Journal:</label>
-        <input type="text" name="journal" >
-    </div>
-    <div class="article changing_field">
-        <label for="volume" id="volume_id" >Volume:</label>
-        <input type="text" name="volume" >
-            
-    </div>
-    <div class="article changing_field">
-        <label for="pages" id="pages_id" >Pages:</label>
-        <input type="text" name="pages" >        
-    </div>
-    <div class="book changing_field">
-        <label for="publisher" id="publisher_id" >Publisher:</label>
-        <input type="text" name="publisher">        
-    </div>
+        {% endif %}
+        {% endwith %}
 
-    
-    <button type="submit">
-        Create
-    </button>
-</form>
+
+        <div class="form-group col-md-12">
+
+            <label for="type" class="form-label">Type:</label>
+            <select name="type" id="type" class="form-select" onchange="changeFields()">
+                <option value="article" selected>Article</option>
+                <option value="inproceeding">Inproceeding</option>
+                <option value="book">Book</option>
+            </select>
+        
+            
+        </div>
+
+
+        <div class="mb-3 col-md-6">
+            <label for="author" class="form-label">Author:</label>
+            <input type="text" name="author" class="form-control w-75" required>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" name="title" class="form-control w-75" required>
+        </div>
+
+        <div class="mb-3 col-md-6">
+            <label for="year" class="form-label">Year:</label>
+            <input type="number" name="year" class="form-control w-75" required>
+        </div>
+
+        <div class="mb-3 col-md-6" id="inproceedings">
+            <label for="booktitle" class="form-label">Booktitle:</label>
+            <input type="text" name="booktitle" class="form-control w-75">
+        </div>
+
+        <div class="mb-3 col-md-6" id="article">
+            <label for="journal" class="form-label">Journal:</label>
+            <input type="text" name="journal" class="form-control w-75">
+        </div>
+
+        <div class="mb-3 col-md-6" id="article">
+            <label for="volume" class="form-label">Volume:</label>
+            <input type="text" name="volume" class="form-control w-75">
+        </div>
+
+        <div class="mb-3 col-md-6" id="article book">
+            <label for="pages" class="form-label">Pages</label>
+            <input type="text" name="pages" class="form-control w-75">
+        </div>
+
+        <div class="mb-3 col-md-6" id="book">
+            <label for="publisher" class="form-label">Publisher</label>
+            <input type="text" name="publisher" class="form-control w-75">
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+
+
+    </form>
+</div>
 
 
 <script>
+
     function changeFields(){
         var type = document.querySelector('select[name="type"]').value;
 
-        var changingFields = document.querySelectorAll('.changing_field');
-
-        var inproceedingsFields = document.querySelectorAll("div.inproceedings");
-        var articleFields = document.querySelectorAll("div.article");
-        var bookFields = document.querySelectorAll("div.book");
-
-        changingFields.forEach(item => {
-            item.style.display = "none";
-        });
-
-        if (type === "article"){
-            articleFields.forEach(item => item.style.display = "block");
-
-        } else if (type === "inproceeding"){
-            inproceedingsFields.forEach(item => item.style.display = "block");
-
-        } else if (type === "book"){
-            bookFields.forEach(item => item.style.display = "block");
+        // get form children that have ids and set display to "none"
+        var formChildren = document.querySelector('form').children;
+        for (var i = 0; i < formChildren.length; i++){
+            if (formChildren[i].id){
+                formChildren[i].style.display = "none";
+            }
         }
 
-        
-    
+        //set display to "block" for children that contain type in their id
+        var children = document.querySelectorAll('[id*=' + type + ']');
+        for (var i = 0; i < children.length; i++){
+            children[i].style.display = "block";
+        }
     }
 
     document.addEventListener("DOMContentLoaded", function(){
             changeFields();
         });
 </script>
-
-<style>
-    
-</style>
-
-
 
 {% endblock %}

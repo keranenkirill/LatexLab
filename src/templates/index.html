@@ -8,13 +8,19 @@ LatexLab
 <h1>LatexLab</h1>
 
 <ul>
+    <div><a href="/new_citation" class="btn btn-primary btn-sm">New Citation</a></div>
+    
     {% if citations|length > 0 %}
         <input type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
         <p id="searchFor" class="d-none">Search for: <span></span></p>
+        <div>
+            <button class="btn btn-success btn-sm" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
+        </div>
+       
     {% endif %}
 
     {% for citation in citations %}
-    <li>
+    <lu>
         <div class="citation-item">
             <strong>Type:</strong> {{ citation.type }} <br>
             <strong>Author:</strong> {{ citation.author }} <br>
@@ -30,30 +36,29 @@ LatexLab
             {% elif citation.type == "book" %}
                 <strong>Publisher:</strong> {{ citation.publisher }} <br>
             {% endif %}
+
+            <form action="/delete_citation/{{ citation.id }}" method="POST">
+                <input type="hidden" name="id" value="{{ citation.id }}">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+            <form action="/edit_citation/{{ citation.id }}" method="GET">
+                <input  type="hidden" name="id" value="{{ citation.id }}">
+                <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+            </form>
         </div>
             
         
-        <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-        <form action="/edit_citation/{{ citation.id }}" method="GET" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn">Edit</button>
-        </form>
-        <button bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
+
+        <button type="button" class="btn btn-dark btn-sm" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
             clipboard</button>
-        <button bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
+        <button type="button" class="btn btn-dark btn-sm" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
         <br>
-    </li>
+    </lu>
     {% else %}
     <li>You don't have any citations</li>
     {% endfor %}
     <li id="noResultsMessage" style="display:none;">No citations found</li>
 </ul>
-
-<button onclick="saveAllBibtexToFile()">Save all as BibTex</button>
-<a href="/new_citation">New citation</a>
 
 <script>
     function filterCitations() {
