@@ -8,11 +8,14 @@ LatexLab
 <h1>LatexLab</h1>
 
 <ul>
+    {% if citations|length > 0 %}
+        <input type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
+        <p id="searchFor" class="d-none">Search for: <span></span></p>
+    {% endif %}
+
     {% for citation in citations %}
     <li>
-       
-
-        <div>
+        <div class="citation-item">
             <strong>Type:</strong> {{ citation.type }} <br>
             <strong>Author:</strong> {{ citation.author }} <br>
             <strong>Title:</strong> {{ citation.title }} <br>
@@ -46,12 +49,52 @@ LatexLab
     {% else %}
     <li>You don't have any citations</li>
     {% endfor %}
+    <li id="noResultsMessage" style="display:none;">No citations found</li>
 </ul>
 
 <button onclick="saveAllBibtexToFile()">Save all as BibTex</button>
 <a href="/new_citation">New citation</a>
 
 <script>
+    function filterCitations() {
+        const input = document.getElementById('citationSearch');
+        const searchForElement = document.getElementById('searchFor');
+        const searchTermDisplay = document.querySelector('#searchFor span');
+        const filter = input.value.toLowerCase();
+        const citations = document.querySelectorAll('.citation-item');
+        const saveAllButton = document.querySelector('button[onclick="saveAllBibtexToFile()"]');
+        let hasVisibleCitations = false;
+
+        citations.forEach(citation => {
+            const listItem = citation.closest('li')
+            const citationText = citation.innerText.toLowerCase();
+
+            if (citationText.includes(filter)) {
+                listItem.style.display = '';
+                hasVisibleCitations = true;
+        } else {
+            listItem.style.display = 'none';
+        }
+
+        searchTermDisplay.textContent = input.value;
+
+        if (input.value.trim() === '') {
+            saveAllButton.style.display = '';
+            searchForElement.classList.add('d-none');
+        } else {
+            searchTermDisplay.style.display = 'none'
+            searchForElement.classList.remove('d-none');
+        }
+        });
+
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        if (hasVisibleCitations) {
+            noResultsMessage.style.display = 'none';
+        } else {
+            noResultsMessage.style.display = 'block';
+        }
+    }
+
     function toClipboard(buttonElement) {
         const text = buttonElement.getAttribute('bibtex-clipboard-data');
         navigator.clipboard.writeText(text);
