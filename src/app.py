@@ -19,7 +19,6 @@ def new_citation():
 
 @app.route("/delete_citation/<int:citation_id>", methods=["POST"])
 def delete_citation(citation_id):
-    print(f"Deleting citation with id {citation_id}")
     del_citation(citation_id)
     return redirect("/")
 
@@ -44,13 +43,10 @@ def edit_citation(citation_id):
 
 @app.route("/update_citation/<int:citation_id>", methods=["POST"])
 def citation_update(citation_id):
-    print(f"Updating citation with id {citation_id}1")
     form_content = request.form.to_dict()
-    print(f"Updating citation with id {citation_id}2")
     try:
         validate_citation_form(form_content)
         update_citation(citation_id, form_content)
-        print(f"Updated citation with id {citation_id}3")
         return redirect("/")
     except Exception as error:
         flash(str(error))

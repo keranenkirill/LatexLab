@@ -6,7 +6,6 @@ Edit Citation
 
 {% block body %}
 
-<h2>Edit Citation. Citation ID: {{ citation_id }}</h2>
 
 <div class="container">
     <form class="row g-3" action="/update_citation/{{citation_id}}" method="POST">
@@ -20,13 +19,11 @@ Edit Citation
         {% endif %}
         {% endwith %}
 
-
         <div class="form-group col-md-12"> 
-            <div class="col-md-1 p-0">
-                <input type="text" name="type" id="type" class="form-control" value="{{ citation.type }}" readonly>
+            <div class="col-md-2 p-0 ">
+                <input type="text" name="type" id="type" class="form-control typetext" value="Edit {{ citation.type }}" readonly>
             </div>
         </div>
-
 
         <div class="mb-3 col-md-6">
             <label for="author" class="form-label">Author:</label>

@@ -8,97 +8,104 @@ LatexLab
 <h1>LatexLab</h1>
 
 <ul>
-    <div><a href="/new_citation" class="btn btn-primary btn-sm">New Citation</a></div>
+    <div>
+        <a class="btn btn-primary" href="/new_citation">New citation</a>
+    </div>
     
     {% if citations|length > 0 %}
-        <input type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
+        <input class="form-control col-md-2" type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
         <p id="searchFor" class="d-none">Search for: <span></span></p>
+        <br>
         <div>
-            <button class="btn btn-success btn-sm" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
+            <button class="btn btn-success" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
         </div>
-       
+        
     {% endif %}
 
     {% for citation in citations %}
-    <lu>
-        <div class="citation-item">
-            <strong>Type:</strong> {{ citation.type }} <br>
-            <strong>Author:</strong> {{ citation.author }} <br>
-            <strong>Title:</strong> {{ citation.title }} <br>
-            <strong>Year:</strong> {{ citation.year }} <br>
-            
-            {% if citation.type == "article" %}
-                <strong>Journal:</strong> {{ citation.journal }} <br>
-                <strong>Volume:</strong> {{ citation.volume }} <br>
-                <strong>Pages:</strong> {{ citation.pages }} <br>
-            {% elif citation.type == "inproceeding" %}
-                <strong>Book title:</strong> {{ citation.booktitle }} <br>
-            {% elif citation.type == "book" %}
-                <strong>Publisher:</strong> {{ citation.publisher }} <br>
-            {% endif %}
 
-            <form action="/delete_citation/{{ citation.id }}" method="POST">
-                <input type="hidden" name="id" value="{{ citation.id }}">
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-            <form action="/edit_citation/{{ citation.id }}" method="GET">
-                <input  type="hidden" name="id" value="{{ citation.id }}">
-                <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
-            </form>
-        </div>
-            
+    <div class="citation-item">
+        <strong>Type:</strong> {{ citation.type }} <br>
+        <strong>Author:</strong> {{ citation.author }} <br>
+        <strong>Title:</strong> {{ citation.title }} <br>
+        <strong>Year:</strong> {{ citation.year }} <br>
         
+        {% if citation.type == "article" %}
+            <strong>Journal:</strong> {{ citation.journal }} <br>
+            <strong>Volume:</strong> {{ citation.volume }} <br>
+            <strong>Pages:</strong> {{ citation.pages }} <br>
+        {% elif citation.type == "inproceeding" %}
+            <strong>Book title:</strong> {{ citation.booktitle }} <br>
+        {% elif citation.type == "book" %}
+            <strong>Publisher:</strong> {{ citation.publisher }} <br>
+        {% endif %}
 
-        <button type="button" class="btn btn-dark btn-sm" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
+
+        <button class="btn btn-success" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
             clipboard</button>
-        <button type="button" class="btn btn-dark btn-sm" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
-        <br>
-    </lu>
+        <button class="btn btn-success" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
+
+        <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
+            <input type="hidden" name="id" value="{{ citation.id }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <form action="/edit_citation/{{ citation.id }}" method="GET" style="margin-top: 10px;">
+            <input type="hidden" name="id" value="{{ citation.id }}">
+            <button type="submit" class="btn">Edit</button>
+        </form>
+    </div>
+
+    <br>
     {% else %}
-    <li>You don't have any citations</li>
+
+    <div class="p-2 bg-info bg-opacity-10 border border-info border-start-2 rounded col-md-2">
+        No citations found
+    </div>
+    
     {% endfor %}
-    <li id="noResultsMessage" style="display:none;">No citations found</li>
 </ul>
+
 
 <script>
     function filterCitations() {
-        const input = document.getElementById('citationSearch');
-        const searchForElement = document.getElementById('searchFor');
-        const searchTermDisplay = document.querySelector('#searchFor span');
-        const filter = input.value.toLowerCase();
-        const citations = document.querySelectorAll('.citation-item');
-        const saveAllButton = document.querySelector('button[onclick="saveAllBibtexToFile()"]');
-        let hasVisibleCitations = false;
+    const input = document.getElementById('citationSearch');
+    const searchTerm = input.value.toLowerCase();
+    const searchForElement = document.getElementById('searchFor');
+    const searchTermDisplay = searchForElement.querySelector('span');
+    const citations = document.querySelectorAll('.citation-item');
+    const saveAllButton = document.querySelector('button[onclick="saveAllBibtexToFile()"]');
+    let hasVisibleCitations = false;
 
-        citations.forEach(citation => {
-            const listItem = citation.closest('li')
-            const citationText = citation.innerText.toLowerCase();
+    citations.forEach(citation => {
+        const citationText = citation.innerText.toLowerCase();
 
-            if (citationText.includes(filter)) {
-                listItem.style.display = '';
-                hasVisibleCitations = true;
+        if (citationText.includes(searchTerm)) {
+            citation.style.display = ''; // Näytetään
+            hasVisibleCitations = true;
         } else {
-            listItem.style.display = 'none';
+            citation.style.display = 'none'; // Piilotetaan
         }
+    });
 
-        searchTermDisplay.textContent = input.value;
-
-        if (input.value.trim() === '') {
-            saveAllButton.style.display = '';
-            searchForElement.classList.add('d-none');
-        } else {
-            searchTermDisplay.style.display = 'none'
-            searchForElement.classList.remove('d-none');
-        }
-        });
-
-        const noResultsMessage = document.getElementById('noResultsMessage');
-        if (hasVisibleCitations) {
-            noResultsMessage.style.display = 'none';
-        } else {
-            noResultsMessage.style.display = 'block';
-        }
+    // Hakutermien päivitys ja tallennuspainikkeen tila
+    searchTermDisplay.textContent = searchTerm;
+    if (searchTerm.trim() === '') {
+        saveAllButton.style.display = ''; // Näytetään tallennuspainike
+        searchForElement.classList.add('d-none'); // Piilotetaan hakuilmoitus
+    } else {
+        saveAllButton.style.display = 'none'; // Piilotetaan tallennuspainike
+        searchForElement.classList.remove('d-none'); // Näytetään hakuilmoitus
     }
+
+    // Näytetään/pidetään piilossa "Ei tuloksia" -viesti
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (hasVisibleCitations) {
+        noResultsMessage.style.display = 'none';
+    } else {
+        noResultsMessage.style.display = 'block';
+    }
+}
+
 
     function toClipboard(buttonElement) {
         const text = buttonElement.getAttribute('bibtex-clipboard-data');

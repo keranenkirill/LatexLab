@@ -1,109 +1,92 @@
-{% extends "layout.html" %}
-
-{% block title %}
-Create a new citation
-{% endblock %}
-
-{% block body %}
+{% extends "layout.html" %} {% block title %} Create a new citation {% endblock
+%} {% block body %}
 
 <h2>Create a new citation</h2>
 
 <div class="container">
     <form class="row" action="/create_citation" method="post">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
+        {% with messages = get_flashed_messages() %} {% if messages %} {% for
+        message in messages %}
         <div class="alert alert-info">{{ message }}</div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-
+        {% endfor %} {% endif %} {% endwith %}
 
         <div class="form-group col-md-12">
-
             <label for="type" class="form-label">Type:</label>
             <select name="type" id="type" class="form-select" onchange="changeFields()">
                 <option value="article" selected>Article</option>
                 <option value="inproceeding">Inproceeding</option>
                 <option value="book">Book</option>
             </select>
-        
-            
         </div>
-
 
         <div class="mb-3 col-md-6">
             <label for="author" class="form-label">Author:</label>
-            <input type="text" name="author" class="form-control w-75" required>
+            <input type="text" name="author" class="form-control w-75" required />
         </div>
 
         <div class="mb-3 col-md-6">
             <label for="title" class="form-label">Title:</label>
-            <input type="text" name="title" class="form-control w-75" required>
+            <input type="text" name="title" class="form-control w-75" required />
         </div>
 
         <div class="mb-3 col-md-6">
             <label for="year" class="form-label">Year:</label>
-            <input type="number" name="year" class="form-control w-75" required>
+            <input type="number" name="year" class="form-control w-75" required />
         </div>
 
         <div class="mb-3 col-md-6" id="inproceedings">
             <label for="booktitle" class="form-label">Booktitle:</label>
-            <input type="text" name="booktitle" class="form-control w-75">
+            <input type="text" name="booktitle" class="form-control w-75" />
         </div>
 
         <div class="mb-3 col-md-6" id="article">
             <label for="journal" class="form-label">Journal:</label>
-            <input type="text" name="journal" class="form-control w-75">
+            <input type="text" name="journal" class="form-control w-75" />
         </div>
 
         <div class="mb-3 col-md-6" id="article">
             <label for="volume" class="form-label">Volume:</label>
-            <input type="text" name="volume" class="form-control w-75">
+            <input type="text" name="volume" class="form-control w-75" />
         </div>
 
         <div class="mb-3 col-md-6" id="article book">
             <label for="pages" class="form-label">Pages</label>
-            <input type="text" name="pages" class="form-control w-75">
+            <input type="text" name="pages" class="form-control w-75" />
         </div>
 
         <div class="mb-3 col-md-6" id="book">
             <label for="publisher" class="form-label">Publisher</label>
-            <input type="text" name="publisher" class="form-control w-75">
+            <input type="text" name="publisher" class="form-control w-75" />
         </div>
 
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
-
-
     </form>
 </div>
 
-
 <script>
-
-    function changeFields(){
+    function changeFields() {
         var type = document.querySelector('select[name="type"]').value;
 
         // get form children that have ids and set display to "none"
-        var formChildren = document.querySelector('form').children;
-        for (var i = 0; i < formChildren.length; i++){
-            if (formChildren[i].id){
+        var formChildren = document.querySelector("form").children;
+        for (var i = 0; i < formChildren.length; i++) {
+            if (formChildren[i].id) {
                 formChildren[i].style.display = "none";
             }
         }
 
         //set display to "block" for children that contain type in their id
-        var children = document.querySelectorAll('[id*=' + type + ']');
-        for (var i = 0; i < children.length; i++){
+        var children = document.querySelectorAll("[id*=" + type + "]");
+        for (var i = 0; i < children.length; i++) {
             children[i].style.display = "block";
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function(){
-            changeFields();
-        });
+    document.addEventListener("DOMContentLoaded", function () {
+        changeFields();
+    });
 </script>
 
 {% endblock %}
