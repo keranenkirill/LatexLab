@@ -8,8 +8,6 @@ def validate_citation_form(content: dict):
     title = content.get('title')
     year = content.get('year')
 
-    print(content)
-
     if 'article' not in type and 'inproceeding' not in type and 'book' not in type:
         raise UserInputError("Please give a valid citation type")
 
