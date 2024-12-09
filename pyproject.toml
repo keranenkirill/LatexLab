@@ -23,6 +23,7 @@ pytest = "^8.3.3"
 pylint = "^3.3.1"
 autopep8 = "^2.3.1"
 coverage = "^7.6.8"
+pytest-cov = "^6.0.0"
 
 [build-system]
 requires = ["poetry-core"]
