@@ -3,12 +3,14 @@ class UserInputError(Exception):
 
 
 def validate_citation_form(content: dict):
-    type = content.get('type')
+    citation_type = content.get('type')
     author = content.get('author')
     title = content.get('title')
     year = content.get('year')
 
-    if 'article' not in type and 'inproceeding' not in type and 'book' not in type:
+    valid_types = ['article', 'inproceeding', 'book']
+
+    if citation_type not in valid_types:
         raise UserInputError("Please give a valid citation type")
 
     if not author or not title or not year:
