@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -38,14 +38,8 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
-      - name: Wait for PostgreSQL
-        run: until pg_isready -h localhost -p 5432; do sleep 1; done
       - name: Run unit tests
-        run: poetry run pytest src/tests --cov=src --cov-report=xml
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        env:
-          CODECOV_TOKEN: ${{ secrets.LATEXLAB24TK }}
+        run: poetry run pytest src/tests
       - name: Run pylint
         run: poetry run pylint src
       - name: Setup chromedriver
