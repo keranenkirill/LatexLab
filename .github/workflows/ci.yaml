@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
       - name: Run unit tests
-        run: poetry run pytest src/tests
+        run: poetry run pytest src/tests --cov=src --cov-report=xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         env:
