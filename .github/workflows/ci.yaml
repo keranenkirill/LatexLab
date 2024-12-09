@@ -33,13 +33,17 @@ jobs:
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
       - name: Install Poetry
         run: pip install poetry
       - name: Install dependencies
-        run: poetry install  
+        run: poetry install
       - name: Run unit tests
         run: poetry run pytest src/tests
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.LATEXLAB24TK }}
       - name: Run pylint
         run: poetry run pylint src
       - name: Setup chromedriver
