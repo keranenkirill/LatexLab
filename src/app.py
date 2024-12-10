@@ -1,14 +1,14 @@
 from flask import flash, jsonify, redirect, render_template, request
 from config import app, test_env
 from db_helper import reset_db
-from repositories.citation_repository import create_citation, get_citations, get_citation
+from repositories.citation_repository import create_citation, get_all_citations, get_citation
 from repositories.citation_repository import del_citation, update_citation
 from util import validate_citation_form
 
 
 @app.route("/")
 def index():
-    citations = get_citations()
+    citations = get_all_citations()
     return render_template("index.html", citations=citations)
 
 
