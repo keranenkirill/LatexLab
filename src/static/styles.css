@@ -1,6 +1,6 @@
 body {
    font-family: 'Roboto', sans-serif;
-   background-color: rgb(248, 249, 250);
+   background-color: #f8f9fa;
 }
 
 .citation-item {
@@ -46,3 +46,37 @@ form input.typetext {
    border-color: rgba(0, 0, 0, 0.149) !important; 
    box-shadow: 0 0 5px rgba(0, 0, 0, 0.146);
 }
+
+.citation-item .d-flex form:first-child {
+   margin-right: 5px; 
+}
+
+.type-card {
+   display: inline-block;
+   background-color: #f8f9fa; /* Vaalea harmaa */
+   color: #212529; /* Tumma teksti */
+   padding: 5px 10px;
+   border-radius: 8px;
+   font-weight: bold;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Hieno varjo */
+}
+
+.info-list {
+   display: flex;
+   flex-direction: column;
+   gap: 5px; /* Etäisyys riveillä */
+}
+.info-label {
+   font-weight: bold;
+   color: #007bff;
+   display: inline-block;
+   width: 100px; /* Kiinteä leveys, jotta arvot linjautuvat */
+}
+
+.info-label {
+   font-weight: bold;
+   color: #212529; /* Bootstrap btn-secondary tekstiväri */
+   margin-right: 5px; /* Pieni väli arvon ja otsikon väliin */
+}
+
+

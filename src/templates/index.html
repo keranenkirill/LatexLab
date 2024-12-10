@@ -5,61 +5,68 @@ LatexLab
 {% endblock %}
 
 {% block body %}
-<h1>LatexLab</h1>
+<h1 class="text-center">LatexLab</h1>
 
 <ul>
-    <div>
+    <div class="d-flex justify-content-center align-items-center">
         <a class="btn btn-primary" href="/new_citation">New citation</a>
     </div>
     
     {% if citations|length > 0 %}
-        <input class="form-control col-md-2" type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
-        <p id="searchFor" class="d-none">Search for: <span></span></p>
-        <br>
-        <div>
-            <button class="btn btn-success" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
+        <input class="form-control mx-auto col-md-2" type="text" id="citationSearch" placeholder="Filter citations..." onkeyup="filterCitations()">
+        <div class="d-flex justify-content-center align-items-center">
+            <p id="searchFor" class="d-none">Search for: <span></span></p>
         </div>
         
+        <br>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-success" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
+        </div>
     {% endif %}
 
     {% for citation in citations %}
 
-    <div class="citation-item">
-        <strong>Type:</strong> {{ citation.type }} <br>
-        <strong>Author:</strong> {{ citation.author }} <br>
-        <strong>Title:</strong> {{ citation.title }} <br>
-        <strong>Year:</strong> {{ citation.year }} <br>
-        
-        {% if citation.type == "article" %}
-            <strong>Journal:</strong> {{ citation.journal }} <br>
-            <strong>Volume:</strong> {{ citation.volume }} <br>
-            <strong>Pages:</strong> {{ citation.pages }} <br>
-        {% elif citation.type == "inproceeding" %}
-            <strong>Book title:</strong> {{ citation.booktitle }} <br>
-        {% elif citation.type == "book" %}
-            <strong>Publisher:</strong> {{ citation.publisher }} <br>
-        {% endif %}
-
+    <div class="citation-item mx-auto">
+        <span class="type-card">{{ citation.type }}</span> <br>
+        <div class="info-list">
+            <div><span class="info-label">Author</span><span class="info-value">{{ citation.author }}</span></div>
+            <div><span class="info-label">Title</span><span class="info-value">{{ citation.title }}</span></div>
+            <div><span class="info-label">Year</span><span class="info-value">{{ citation.year }}</span></div>
+            {% if citation.type == "article" %}
+                <div><span class="info-label">Journal</span><span class="info-value">{{ citation.journal }}</span></div>
+                <div><span class="info-label">Volume</span><span class="info-value">{{ citation.volume }}</span></div>
+                <div><span class="info-label">Pages</span><span class="info-value">{{ citation.pages }}</span></div>
+            {% elif citation.type == "inproceeding" %}
+                <div><span class="info-label">Book title</span><span class="info-value">{{ citation.booktitle }}</span></div>
+            {% elif citation.type == "book" %}
+                <div><span class="info-label">Publisher</span><span class="info-value">{{ citation.publisher }}</span></div>
+            {% endif %}
+        </div>
 
         <button class="btn btn-success" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
             clipboard</button>
         <button class="btn btn-success" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
 
-        <form action="/delete_citation/{{ citation.id }}" method="POST" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-        <form action="/edit_citation/{{ citation.id }}" method="GET" style="margin-top: 10px;">
-            <input type="hidden" name="id" value="{{ citation.id }}">
-            <button type="submit" class="btn">Edit</button>
-        </form>
+        <div class="d-flex mt-1">
+            <form action="/edit_citation/{{ citation.id }}" method="GET" class="me-2">
+                <input type="hidden" name="id" value="{{ citation.id }}">
+                <button type="submit" class="btn btn-secondary">Edit</button>
+            </form>
+            <form action="/delete_citation/{{ citation.id }}" method="POST" ">
+                <input type="hidden" name="id" value="{{ citation.id }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            
+        </div>
     </div>
 
     <br>
     {% else %}
 
-    <div class="p-2 bg-info bg-opacity-10 border border-info border-start-2 rounded col-md-2">
-        No citations found
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="p-2 bg-info bg-opacity-10 border border-info border-start-2 rounded col-md-2 text-center">
+            No citations found
+        </div>
     </div>
     
     {% endfor %}
@@ -136,8 +143,6 @@ LatexLab
             toFile(tempButton);
         }
     }
-
-
-
+    
 </script>
 {% endblock %}
