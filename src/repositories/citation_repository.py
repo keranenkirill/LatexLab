@@ -29,11 +29,12 @@ def del_citation(citation_id: int):
     db.session.commit()
 
 
-def get_citations():
+def get_all_citations():
     result = db.session.execute(text(
         """SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher 
         FROM citations"""))
     citations = result.fetchall()
+
     return [
         Citation(
             citation[0],   # id
