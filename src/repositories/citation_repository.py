@@ -34,6 +34,7 @@ def get_all_citations():
         """SELECT id, type, author, title, year, booktitle, journal, volume, pages, publisher 
         FROM citations"""))
     citations = result.fetchall()
+
     return [
         Citation(
             citation[0],   # id
