@@ -10,5 +10,9 @@ print(f"Test environment: {test_env}")
 
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
-app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
+
+databaseUrl = getenv("DATABASE_URL")
+if databaseUrl:
+    databaseUrl = databaseUrl.replace('postgres://', 'postgresql://')
+app.config["SQLALCHEMY_DATABASE_URI"] = databaseUrl
 db = SQLAlchemy(app)

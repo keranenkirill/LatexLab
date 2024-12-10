@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "env": {
+    "PYTHONPATH": "src/"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.py"
+    }
+  ]
+}
