@@ -1,0 +1,48 @@
+body {
+   font-family: 'Roboto', sans-serif;
+   background-color: rgb(248, 249, 250);
+}
+
+.citation-item {
+   background-color: lightgray;
+   padding: 10px;
+   margin-bottom: 10px;
+   border-radius: 5px;
+   width: 20%;
+}   
+
+input {
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.btn-success {
+   margin-bottom: 10px;
+}
+
+.bg-info {
+   margin-top: 10px;
+   background-color: rgba(255, 166, 0, 0.612) !important;
+   color: black !important; 
+   text-align: center;
+}
+
+.border-info {
+   border-color: rgb(255, 166, 0) !important; 
+}
+    
+form input.form-control {
+   border-color: green !important; 
+   box-shadow: 0 0 5px green;
+}
+
+form input.no-green-border {
+   border-color: none !important; 
+   box-shadow: none !important;
+}
+
+form input.typetext {
+   background-color: rgb(248, 249, 250) !important; 
+   border-color: rgba(0, 0, 0, 0.149) !important; 
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.146);
+}
