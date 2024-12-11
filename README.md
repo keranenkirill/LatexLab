@@ -1,5 +1,6 @@
 # LatexLab - Ohjelmistotuotannon miniprojekti
 
+
 [![GHA workflow badge](https://github.com/keranenkirill/LatexLab/workflows/CI/badge.svg)](https://github.com/keranenkirill/LatexLab/actions)
 
 [![codecov](https://codecov.io/gh/keranenkirill/LatexLab/graph/badge.svg?token=dABPpxln2N)](https://codecov.io/gh/keranenkirill/LatexLab)
