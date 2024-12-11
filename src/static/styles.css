@@ -8,12 +8,24 @@ body {
    padding: 10px;
    margin-bottom: 10px;
    border-radius: 5px;
-   width: 20%;
-}   
+   width: calc(100% - 20px);
+   max-width: 300px;
+}
+
+@media (max-width: 576px) {
+   .citation-item {
+      width: 100%;
+   }
+}
 
 input {
    margin-top: 10px;
    margin-bottom: 10px;
+}
+
+button {
+   margin: 5px 0;
+   width: 100%;
 }
 
 .btn-success {
@@ -30,10 +42,10 @@ input {
 .border-info {
    border-color: rgb(255, 166, 0) !important; 
 }
-    
+
 form input.form-control {
    border-color: green !important; 
-   box-shadow: 0 0 5px green;
+   box-shadow: 0 0 5px rgba(0, 128, 0, 0.5);
 }
 
 form input.no-green-border {
@@ -79,4 +91,7 @@ form input.typetext {
    margin-right: 5px; /* Pieni väli arvon ja otsikon väliin */
 }
 
-
+.card {
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Hieno varjo */
+   border-radius: 8px; /* Pyöristetyt kulmat */
+}

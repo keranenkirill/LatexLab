@@ -20,43 +20,41 @@ LatexLab
         
         <br>
         <div class="d-flex justify-content-center align-items-center">
-            <button class="btn btn-success" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
+            <button class="btn btn-success w-25" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
         </div>
     {% endif %}
 
     {% for citation in citations %}
 
-    <div class="citation-item mx-auto">
-        <span class="type-card">{{ citation.type }}</span> <br>
-        <div class="info-list">
-            <div><span class="info-label">Author</span><span class="info-value">{{ citation.author }}</span></div>
-            <div><span class="info-label">Title</span><span class="info-value">{{ citation.title }}</span></div>
-            <div><span class="info-label">Year</span><span class="info-value">{{ citation.year }}</span></div>
-            {% if citation.type == "article" %}
-                <div><span class="info-label">Journal</span><span class="info-value">{{ citation.journal }}</span></div>
-                <div><span class="info-label">Volume</span><span class="info-value">{{ citation.volume }}</span></div>
-                <div><span class="info-label">Pages</span><span class="info-value">{{ citation.pages }}</span></div>
-            {% elif citation.type == "inproceeding" %}
-                <div><span class="info-label">Book title</span><span class="info-value">{{ citation.booktitle }}</span></div>
-            {% elif citation.type == "book" %}
-                <div><span class="info-label">Publisher</span><span class="info-value">{{ citation.publisher }}</span></div>
-            {% endif %}
-        </div>
-
-        <button class="btn btn-success" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to
-            clipboard</button>
-        <button class="btn btn-success" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTex</button>
-
-        <div class="d-flex mt-1">
-            <form action="/edit_citation/{{ citation.id }}" method="GET" class="me-2">
-                <input type="hidden" name="id" value="{{ citation.id }}">
-                <button type="submit" class="btn btn-secondary">Edit</button>
-            </form>
-            <form action="/delete_citation/{{ citation.id }}" method="POST" ">
-                <input type="hidden" name="id" value="{{ citation.id }}">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            
+    <div class="col-md-6 col-lg-3 mb-3 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ citation.type }}</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Author:</strong> {{ citation.author }}</li>
+                    <li><strong>Title:</strong> {{ citation.title }}</li>
+                    <li><strong>Year:</strong> {{ citation.year }}</li>
+                    {% if citation.type == "article" %}
+                    <li><strong>Journal:</strong> {{ citation.journal }}</li>
+                    <li><strong>Volume:</strong> {{ citation.volume }}</li>
+                    <li><strong>Pages:</strong> {{ citation.pages }}</li>
+                    {% elif citation.type == "inproceeding" %}
+                    <li><strong>Book Title:</strong> {{ citation.booktitle }}</li>
+                    {% elif citation.type == "book" %}
+                    <li><strong>Publisher:</strong> {{ citation.publisher }}</li>
+                    {% endif %}
+                </ul>
+                <button class="btn btn-success btn-sm" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Copy to Clipboard</button>
+                <button class="btn btn-primary btn-sm" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTeX</button>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <form action="/edit_citation/{{ citation.id }}" method="GET">
+                    <button type="submit" class="btn btn-secondary btn-sm">Edit</button>
+                </form>
+                <form action="/delete_citation/{{ citation.id }}" method="POST">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
         </div>
     </div>
 
