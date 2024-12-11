@@ -23,10 +23,14 @@ LatexLab
             <button class="btn btn-success w-25" onclick="saveAllBibtexToFile()">Save all as BibTex</button>
         </div>
     {% endif %}
+    
+    <div id="noResultsMessage" style="display:none;" class="text-center mt-3">
+        Ei tuloksia
+    </div>
 
     {% for citation in citations %}
 
-    <div class="col-md-6 col-lg-3 mb-3 mx-auto">
+    <div class="col-md-6 col-lg-3 mb-3 mx-auto citation-item">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ citation.type }}</h5>
@@ -35,13 +39,13 @@ LatexLab
                     <li><strong>Title:</strong> {{ citation.title }}</li>
                     <li><strong>Year:</strong> {{ citation.year }}</li>
                     {% if citation.type == "article" %}
-                    <li><strong>Journal:</strong> {{ citation.journal }}</li>
-                    <li><strong>Volume:</strong> {{ citation.volume }}</li>
-                    <li><strong>Pages:</strong> {{ citation.pages }}</li>
+                        <li><strong>Journal:</strong> {{ citation.journal }}</li>
+                        <li><strong>Volume:</strong> {{ citation.volume }}</li>
+                        <li><strong>Pages:</strong> {{ citation.pages }}</li>
                     {% elif citation.type == "inproceeding" %}
-                    <li><strong>Book Title:</strong> {{ citation.booktitle }}</li>
+                        <li><strong>Book Title:</strong> {{ citation.booktitle }}</li>
                     {% elif citation.type == "book" %}
-                    <li><strong>Publisher:</strong> {{ citation.publisher }}</li>
+                        <li><strong>Publisher:</strong> {{ citation.publisher }}</li>
                     {% endif %}
                 </ul>
                 <button class="btn btn-success btn-sm" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to clipboard</button>
@@ -73,44 +77,46 @@ LatexLab
 
 <script>
     function filterCitations() {
-    const input = document.getElementById('citationSearch');
-    const searchTerm = input.value.toLowerCase();
-    const searchForElement = document.getElementById('searchFor');
-    const searchTermDisplay = searchForElement.querySelector('span');
-    const citations = document.querySelectorAll('.citation-item');
-    const saveAllButton = document.querySelector('button[onclick="saveAllBibtexToFile()"]');
-    let hasVisibleCitations = false;
+        const input = document.getElementById('citationSearch');
+        const searchTerm = input.value.toLowerCase();
+        const searchForElement = document.getElementById('searchFor');
+        const searchTermDisplay = searchForElement.querySelector('span');
+        const citations = document.querySelectorAll('.citation-item');
+        const saveAllButton = document.querySelector('button[onclick="saveAllBibtexToFile()"]');
+        let hasVisibleCitations = false;
 
-    citations.forEach(citation => {
-        const citationText = citation.innerText.toLowerCase();
+        citations.forEach(citation => {
+            const citationText = citation.innerText.toLowerCase();
+            if (citationText.includes(searchTerm)) {
+                citation.style.display = '';
+                hasVisibleCitations = true;
+            } else {
+                citation.style.display = 'none';
+            }
+        });
 
-        if (citationText.includes(searchTerm)) {
-            citation.style.display = ''; // Näytetään
-            hasVisibleCitations = true;
+        searchTermDisplay.textContent = searchTerm;
+        if (searchTerm.trim() === '') {
+            if (saveAllButton) {
+                saveAllButton.style.display = '';
+            }
+            searchForElement.classList.add('d-none');
         } else {
-            citation.style.display = 'none'; // Piilotetaan
+            if (saveAllButton) {
+                saveAllButton.style.display = 'none';
+            }
+            searchForElement.classList.remove('d-none');
         }
-    });
 
-    // Hakutermien päivitys ja tallennuspainikkeen tila
-    searchTermDisplay.textContent = searchTerm;
-    if (searchTerm.trim() === '') {
-        saveAllButton.style.display = ''; // Näytetään tallennuspainike
-        searchForElement.classList.add('d-none'); // Piilotetaan hakuilmoitus
-    } else {
-        saveAllButton.style.display = 'none'; // Piilotetaan tallennuspainike
-        searchForElement.classList.remove('d-none'); // Näytetään hakuilmoitus
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        if (noResultsMessage) {
+            if (hasVisibleCitations) {
+                noResultsMessage.style.display = 'none';
+            } else {
+                noResultsMessage.style.display = 'block';
+            }
+        }
     }
-
-    // Näytetään/pidetään piilossa "Ei tuloksia" -viesti
-    const noResultsMessage = document.getElementById('noResultsMessage');
-    if (hasVisibleCitations) {
-        noResultsMessage.style.display = 'none';
-    } else {
-        noResultsMessage.style.display = 'block';
-    }
-}
-
 
     function toClipboard(buttonElement) {
         const text = buttonElement.getAttribute('bibtex-clipboard-data');
@@ -141,6 +147,5 @@ LatexLab
             toFile(tempButton);
         }
     }
-    
 </script>
 {% endblock %}
