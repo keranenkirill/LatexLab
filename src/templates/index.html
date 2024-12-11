@@ -45,7 +45,7 @@ LatexLab
                     {% endif %}
                 </ul>
                 <button class="btn btn-success btn-sm" bibtex-clipboard-data="{{ citation.as_bibtex }}" onclick="toClipboard(this)">Bibtex to clipboard</button>
-                <button class="btn btn-primary btn-sm" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTeX</button>
+                <button class="btn btn-success btn-sm" bibtex-file-data="{{ citation.as_bibtex }}" onclick="toFile(this)">Save as BibTeX</button>
             </div>
             <div class="card-footer d-flex justify-content-between">
                 <form action="/edit_citation/{{ citation.id }}" method="GET">
