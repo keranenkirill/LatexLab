@@ -15,12 +15,12 @@ Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelm
 - [Product Backlog](https://docs.google.com/spreadsheets/d/1z1sriGN7_VkhWK3ftrvxO8W_lWaIzaeMN91lBrkc4Ag/edit?gid=1#gid=1)
 - [Kattavuus raportti](https://html-preview.github.io/?url=https://github.com/keranenkirill/LatexLab/blob/main/htmlcov/index.html)
 
-## Tulevia toimintoja
+## Toimintoja
 
 - **Viitteiden lisääminen:** Mahdollisuus lisätä viitteitä käyttäjäystävällisen lomakkeen kautta.
 - **Viitteiden listaus:** Viitteet voidaan listata selkeästi ja luettavassa muodossa.
 - **Viitte tiedoston generoiminen:** Viitteestä voi generoida LaTeX-dokumenttiin yhteensopiva BibTeX-tyyppinen tiedosto.
-- **Viitteiden suodattaminen:** viitteen tyypin, kirjoittajan,vuoden tai julkaisun mukaan.
+- **Viitteiden suodattaminen:** kirjoittajan,vuoden tai julkaisun mukaan.
 
 ## Teknologiat
 
