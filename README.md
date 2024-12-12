@@ -10,7 +10,7 @@ Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelm
 
 ## Sovellus on saatavilla Vercelissä
 
-Sovelluksesta on versio käytettävissä Vercelissä, pääset käyttämään sitä [tästä](https://latex-lab.vercel.app)
+Sovellus on saatavilla suoraan Vercel-alustalla. Pääset käyttämään sitä [tästä](https://latex-lab.vercel.app)
 
 ## Dokumentit
 
