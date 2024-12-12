@@ -8,6 +8,10 @@
 
 Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelmään helppokäyttöisen käyttöliittymän kautta. Järjestelmä generoi näistä viitteistä automaattisesti BibTeX-tiedoston, jonka voi helposti liittää LaTeX-dokumenttiin. Sovellus mahdollistaa viitteiden tehokkaan hallinnan, suodatuksen ja organisoinnin, koska LaTeXissa viitteiden hallinta voi olla monimutkaista ja aikaa vievää. Keskittymällä gradun kannalta olennaisiin viitekenttiin sovellus tekee viitteiden hallinnasta käyttäjäystävällisempää ja vähentää manuaalista työtä. Sovellus tukee article-, inproceedings- ja book-lähdetyyppejä.
 
+## Sovellus on saatavilla Vercelissä
+
+Sovelluksesta on versio käytettävissä Vercelissä, pääset käyttämään sitä [tästä](https://latex-lab.vercel.app)
+
 ## Dokumentit
 
 - [Manuaali](docs/manuaali.md)
