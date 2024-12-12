@@ -1,8 +1,8 @@
 # LatexLab - Ohjelmistotuotannon miniprojekti
 
-[![GHA workflow badge](https://github.com/keranenkirill/LatexLab/workflows/CI/badge.svg)](https://github.com/keranenkirill/LatexLab/actions)
+[![GHA workflow badge](https://github.com/MarkusWahlman/LatexLab/workflows/CI/badge.svg)](https://github.com/MarkusWahlman/LatexLab/actions)
 
-[![codecov](https://codecov.io/gh/keranenkirill/LatexLab/graph/badge.svg?token=dABPpxln2N)](https://codecov.io/gh/keranenkirill/LatexLab)
+[![codecov](https://codecov.io/github/MarkusWahlman/LatexLab/graph/badge.svg?token=dABPpxln2N)](https://codecov.io/github/MarkusWahlman/LatexLab)
 
 ## Järjestelmän kuvaus
 
@@ -34,7 +34,7 @@ Tämän sovelluksen avulla käyttäjä voi lisätä lähdeviitteitä järjestelm
 Kloonaa repositorio
 
 ```bash
-git clone git@github.com:keranenkirill/LatexLab.git
+git clone https://github.com/MarkusWahlman/LatexLab.git
 ```
 
 Luo juurihakemistoon tiedosto .env, jonka sisältö on seuraava:
