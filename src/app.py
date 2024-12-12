@@ -1,4 +1,4 @@
-from flask import flash, jsonify, redirect, render_template, request
+from flask import flash, jsonify, redirect, render_template, request, url_for
 from config import app, test_env
 from db_helper import reset_db
 from repositories.citation_repository import create_citation, get_citations, get_citation
@@ -50,7 +50,7 @@ def citation_update(citation_id):
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return redirect("/edit_citation/<int:citation_id>")
+        return redirect(url_for("edit_citation", citation_id=citation_id))
 
 
 # Route for tests
