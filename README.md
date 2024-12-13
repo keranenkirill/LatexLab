@@ -14,6 +14,7 @@ Sovellus on saatavilla suoraan Vercel-alustalla. Pääset käyttämään sitä [
 
 ## Dokumentit
 
+- [Raportti](docs/loppuraportti.md)
 - [Manuaali](docs/manuaali.md)
 - [Valmiin määritelmä](docs/definitionOfDone.md)
 - [Product Backlog](https://docs.google.com/spreadsheets/d/1z1sriGN7_VkhWK3ftrvxO8W_lWaIzaeMN91lBrkc4Ag/edit?gid=1#gid=1)
